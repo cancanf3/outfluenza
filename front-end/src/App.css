@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  padding: 10px;
+}
+
+.button {
+  margin: 5px;
 }
 
 .App-logo {
@@ -20,6 +25,16 @@
 
 .App-intro {
   font-size: large;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif
+}
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 300;
 }
 
 @keyframes App-logo-spin {
