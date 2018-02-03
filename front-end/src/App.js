@@ -29,7 +29,8 @@ class App extends Component {
             coordinates: {
               "latitude": 0,
               "longitude": 0
-            }
+            },
+            flag:0,
         };
     }
 
@@ -39,7 +40,8 @@ class App extends Component {
             return response.json();
         }).then(result => {
             result.map(tweet => {
-                fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY).then(function (response) {
+                fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
+                .then(function (response) {
                     return response.json();
                 }).then(result => {
                     tweet.location = result;
@@ -51,19 +53,50 @@ class App extends Component {
         });
     }
 
+
+    getTweets() {
+      fetch('https://86c8f266.ngrok.io/rest/mangohacks/tweets/', {
+        method: 'POST',
+        body: JSON.stringify(this.state.coordinates),
+        headers: {'Content-Type': 'application/json'}
+      }).then( data => {
+        return data.json();
+      }).then(data => {
+          this.setState({tweets:data});
+      });
+
+    }
+
+
+    getDoctors() {
+      console.log(this.state.coordinates);
+      console.log(this.state.flag);
+      fetch('https://86c8f266.ngrok.io/rest/mangohacks/doctors/', {
+        method: 'POST',
+        body: JSON.stringify(this.state.coordinates),
+        headers: {'Content-Type': 'application/json'}
+
+      }).then( data => { return data.json(); }).then(data => {
+          console.log(data);
+      });
+
+    }
+
     componentDidMount() {
         this.getGeoLoc();
+
         // this.callAPI();
     }
 
     toggleTweet() {
         var state = this.state.showTweets;
         this.setState({showTweets:!state});
+        this.getTweets();
+        this.getDoctors();
     }
 
     callFluLocation = (e) => {
         var zip = e.target.value;
-
         if(zip.length > 4) {
             console.log("A real zip code");
         }
@@ -77,9 +110,14 @@ class App extends Component {
               "longitude": position.coords.longitude,
             };
             this.setState({coordinates:json})
+
         });
       }
     }
+
+
+
+
 
     render() {
         return (
