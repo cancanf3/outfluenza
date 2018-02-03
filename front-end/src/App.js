@@ -3,6 +3,7 @@ import { Router, browserHistory, Route, Link } from 'react-router';
 import logo from './aux/germs.svg';
 import pain from './aux/pain.svg';
 import prescription from './aux/prescription.svg';
+import like from './aux/like.svg';
 import './App.css';
 import Notification from './notification.js';
 import Tweets from './Tweets.js';
@@ -123,6 +124,11 @@ class App extends Component {
                         </div>
                         <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
                         {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                        <div className='division'>
+                            <div className='footer'>
+                                <h4>Made with <img src={like} className="like" alt="like" /></h4>
+                            </div>
+                        </div>
                     </div>
                 </MuiThemeProvider>
             </div>

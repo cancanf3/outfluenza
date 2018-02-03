@@ -1,8 +1,9 @@
 .App {
   text-align: center;
-  padding: 10px;
+  padding-top: 10px;
   padding-left: 0px;
   padding-right: 0px;
+  padding-bottom: 0px;
 }
 
 .button {
@@ -46,7 +47,8 @@ body {
 }
 
 .personal {
-    background-color: #B2EBF2;
+    /* background-color: #B2EBF2; */
+    background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
     padding: 2% 0 2% 0;
     height: 50vh;
     min-width: 100%;
@@ -54,9 +56,19 @@ body {
 }
 
 .community {
-    background-color: #80DEEA;
+    /* background-color: #80DEEA; */
+    background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
     padding: 2% 0 2% 0;
     height: 50vh;
+    min-width: 100%;
+    background-size: cover;
+}
+
+.footer {
+    background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
+    padding: 2% 0 0 0;
+    margin-bottom: 0;
+    height: 10vh;
     min-width: 100%;
     background-size: cover;
 }
@@ -67,6 +79,10 @@ body {
 
 .prescription {
     height: 80px;
+}
+
+.like {
+    height: 20px;
 }
 
 @keyframes App-logo-spin {
