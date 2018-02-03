@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router, browserHistory, Route, Link } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
-import './notifcation.js'
+import Notification from './notification.js';
 
 const Page = ({ title }) => (
     <div className="App">
@@ -22,6 +22,7 @@ const Page = ({ title }) => (
       <p>
         <Link to="/settings">Settings</Link>
       </p>
+      <Notification />
     </div>
 );
 

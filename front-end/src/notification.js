@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactNotifications from 'react-browser-notifications';
 
-export class Notification extends React.Component {
+export default class Notification extends React.Component {
   constructor() {
     super();
     this.showNotifications = this.showNotifications.bind(this);
@@ -46,5 +46,3 @@ export class Notification extends React.Component {
     )
   }
 }
-
-export default (Notification);
