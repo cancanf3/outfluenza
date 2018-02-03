@@ -49,17 +49,18 @@ class App extends Component {
     }
 
     callAPI(){
+        let API_KEY = 'paste google api key here'
         fetch('http://api.flutrack.org/?s=flu').then(function (response) {
             return response.json();
         }).then(result => {
-            // result.map(tweet => {
-            //     fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true').then(function (response) {
-            //         return response.json();
-            //     }).then(result => {
-            //         tweet.location = result;
-            //         console.log(result);
-            //     })
-            // })
+            result.map(tweet => {
+                fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY).then(function (response) {
+                    return response.json();
+                }).then(result => {
+                    tweet.location = result;
+                    console.log(result);
+                })
+            })
             this.setState({tweets:result})
             // console.log(this.state.tweets);
         });
