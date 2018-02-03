@@ -91,7 +91,7 @@ class App extends Component {
             <div>
               <MuiThemeProvider>
                 <div className="App">
-                  <div className="App-header">
+                  <div>
                       <img src={logo} className="App-logo" alt="logo" />
                       <h2>Outfluenza</h2>
                   </div>
