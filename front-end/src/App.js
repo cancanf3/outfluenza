@@ -4,6 +4,15 @@ import logo from './logo.svg';
 import './App.css';
 import Notification from './notification.js';
 import Tweets from './Tweets.js';
+import WebFont from 'webfontloader';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+
+WebFont.load({
+  google: {
+    families: ['Open Sans:300,400', 'sans-serif']
+  }
+});
 
 const Page = ({ title }) => (
     <div className="App">

@@ -22,6 +22,16 @@
   font-size: large;
 }
 
+body {
+  font-family: 'Open Sans', sans-serif
+}
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 300;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
