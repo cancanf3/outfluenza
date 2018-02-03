@@ -1,4 +1,4 @@
-wqimport React, { Component } from 'react';
+import React, { Component } from 'react';
 import Tweet from './Tweet.js';
 import CircularProgress from 'material-ui/CircularProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
