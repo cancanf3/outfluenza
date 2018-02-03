@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Router, browserHistory, Route, Link } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
+import './notifcation.js'
 
 const Page = ({ title }) => (
     <div className="App">
