@@ -39,6 +39,28 @@ const Settings = (props) => (
 );
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      tweets: 'json',
+    };
+  }
+
+  callAPI(){
+    fetch('http://api.flutrack.org/?s=flu').then(function (response) {
+        return response.json();
+      }).then(result => {
+        this.setState({tweets:result})
+        console.log(this.state.tweets);
+      });
+  }
+
+  componentDidMount() {
+    this.callAPI();
+  }
+
+
   render() {
     return (
       <Router history={browserHistory}>

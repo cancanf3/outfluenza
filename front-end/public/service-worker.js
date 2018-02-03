@@ -20,6 +20,22 @@ self.addEventListener("activate", event => {
   );
 });
 
+
+// PUSH Notification
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'images/icon.png',
+    badge: 'images/badge.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
 // The first time the user starts up the PWA, 'install' is triggered.
 self.addEventListener('install', function(event) {
   if (doCache) {
