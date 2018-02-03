@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Router, browserHistory, Route, Link } from 'react-router';
-import logo from './logo.svg';
+import logo from './aux/germs.svg';
 import './App.css';
 import Notification from './notification.js';
 import Tweets from './Tweets.js';
 import WebFont from 'webfontloader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 WebFont.load({
@@ -54,11 +55,12 @@ class App extends Component {
         super(props);
         this.state = {
             tweets: 'loading',
+            showTweets: false
         };
     }
 
     callAPI(){
-        let API_KEY = 'paste google api key here'
+        let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
         fetch('http://api.flutrack.org/?s=flu').then(function (response) {
             return response.json();
         }).then(result => {
@@ -79,16 +81,24 @@ class App extends Component {
         this.callAPI();
     }
 
+    toggleTweet() {
+      var state = this.state.showTweets;
+      this.setState({showTweets:!state});
+    }
 
     render() {
         return (
             <div>
-                <Router history={browserHistory}>
-                    <Route path="/" component={Home}/>
-                    <Route path="/about" component={About}/>
-                    <Route path="/settings" component={Settings}/>
-                </Router>
-                <Tweets tweets={this.state.tweets}/>
+              <MuiThemeProvider>
+                <div className="App">
+                  <div className="App-header">
+                      <img src={logo} className="App-logo" alt="logo" />
+                      <h2>Outfluenza</h2>
+                  </div>
+                  <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
+                  {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                </div>
+                </MuiThemeProvider>
             </div>
         );
     }
