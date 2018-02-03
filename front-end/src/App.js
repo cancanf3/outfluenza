@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Router, browserHistory, Route, Link } from 'react-router';
 import logo from './aux/germs.svg';
+import pain from './aux/pain.svg';
+import prescription from './aux/prescription.svg';
 import './App.css';
 import Notification from './notification.js';
 import Tweets from './Tweets.js';
@@ -10,9 +12,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 WebFont.load({
-  google: {
-    families: ['Open Sans:300,400', 'sans-serif']
-  }
+    google: {
+        families: ['Open Sans:300,400', 'sans-serif']
+    }
 });
 
 const Page = ({ title }) => (
@@ -82,22 +84,46 @@ class App extends Component {
     }
 
     toggleTweet() {
-      var state = this.state.showTweets;
-      this.setState({showTweets:!state});
+        var state = this.state.showTweets;
+        this.setState({showTweets:!state});
+    }
+
+    callFluLocation = (e) => {
+        var zip = e.target.value;
+
+        if(zip.length > 4) {
+            console.log("A real zip code");
+        }
     }
 
     render() {
         return (
             <div>
-              <MuiThemeProvider>
-                <div className="App">
-                  <div>
-                      <img src={logo} className="App-logo" alt="logo" />
-                      <h2>Outfluenza</h2>
-                  </div>
-                  <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
-                  {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
-                </div>
+                <MuiThemeProvider>
+                    <div className="App">
+                        <div>
+                            <img src={logo} className="App-logo" alt="logo" />
+                            <h2>Outfluenza</h2>
+                        </div>
+                        <hr/>
+                        <h2> Your community is % </h2>
+                        <div className='division'>
+                            <div className='personal'>
+                                <img src={pain} className="pain" alt="pain" />
+                                <h2>You are % likely to contract the flu</h2>
+                                <h4>Some more data</h4>
+                            </div>
+                        </div>
+                        <div className='division'>
+                            <div className='community'>
+                                <img src={prescription} className="prescription" alt="prescription" />
+                                <h2>Your community is % infected</h2>
+                                <h4>Some more data</h4>
+                            </div>
+                        </div>
+                        <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
+                        {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                    </div>
                 </MuiThemeProvider>
             </div>
         );

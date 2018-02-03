@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   padding: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .button {
@@ -35,6 +37,36 @@ body {
 }
 .subheading {
   font-weight: 300;
+}
+
+.division {
+    box-sizing: content-box;
+    display: block;
+    margin: 0 0 0 0;
+}
+
+.personal {
+    background-color: #B2EBF2;
+    padding: 2% 0 2% 0;
+    height: 50vh;
+    min-width: 100%;
+    background-size: cover;
+}
+
+.community {
+    background-color: #80DEEA;
+    padding: 2% 0 2% 0;
+    height: 50vh;
+    min-width: 100%;
+    background-size: cover;
+}
+
+.pain {
+    height: 80px;
+}
+
+.prescription {
+    height: 80px;
 }
 
 @keyframes App-logo-spin {
