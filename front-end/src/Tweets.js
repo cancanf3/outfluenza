@@ -43,7 +43,6 @@ class Tweets extends Component {
                             />
                         ) : <h1>Loading tweets...</h1>)
                     }
-                }
             </div>
         );
     }
