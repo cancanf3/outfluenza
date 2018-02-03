@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   callAPI(){
-    fetch('http://api.flutrack.org/?s=flu').then(function (response) {
+    fetch('https://api.flutrack.org/?s=flu').then(function (response) {
         return response.json();
       }).then(result => {
         this.setState({tweets:result})
@@ -56,8 +56,17 @@ class App extends Component {
       });
   }
 
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(function(location) {
+      console.log(location.coords.latitude);
+      console.log(location.coords.longitude);
+      console.log(location.coords.accuracy);
+    });
+  }
+
   componentDidMount() {
-    this.callAPI();
+    // this.callAPI();
+    this.getLocation();
   }
 
 
