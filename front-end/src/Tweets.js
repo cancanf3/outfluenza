@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Tweet from './Tweet.js';
+import CircularProgress from 'material-ui/CircularProgress';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Tweets extends Component {
 
@@ -26,6 +28,7 @@ class Tweets extends Component {
 
         return (
             <div>
+              <MuiThemeProvider>
                 <input
                     type='text'
                     value={this.state.search}
@@ -41,8 +44,8 @@ class Tweets extends Component {
                                 user={tweet.user_name}
                                 text={tweet.tweet_text}
                             />
-                        ) : <h1>Loading tweets...</h1>)
-                    }
+                        ) : <CircularProgress mode="indeterminate" />)}
+                    </MuiThemeProvider>
             </div>
         );
     }
