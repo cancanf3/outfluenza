@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "firebase": "^4.9.1",
-=======
     "material-ui": "^0.20.0",
->>>>>>> c8b289e306398cea0812902399fbc8a473327aee
     "react": "^16.2.0",
     "react-browser-notifications": "^1.0.14",
     "react-dom": "^16.2.0",
