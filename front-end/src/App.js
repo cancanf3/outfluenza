@@ -122,8 +122,10 @@ class App extends Component {
                                 <h4>Some more data</h4>
                             </div>
                         </div>
-                        <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
-                        {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                        <div className='tweets'>
+                            <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
+                            {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                        </div>
                         <div className='division'>
                             <div className='footer'>
                                 <h4>Made with <img src={like} className="like" alt="like" /></h4>

@@ -21,13 +21,13 @@ class Tweets extends Component {
         return (
             <div>
               <MuiThemeProvider>
-                <input
+                {/* <input
                     type='text'
                     value={this.state.search}
                     onChange={this.callFluLocation}
                 />
                 <br></br>
-                <br></br>
+                <br></br> */}
                 {
                     (this.props.tweets !== 'loading' ?
                         this.props.tweets.map(

@@ -64,6 +64,16 @@ body {
     background-size: cover;
 }
 
+.tweets {
+    box-sizing: content-box;
+    display: block;
+    margin: 0 0 0 0;
+    background-color: #3abdcf;
+    padding: 2% 0 2% 0;
+    min-width: 100%;
+    background-size: cover;
+}
+
 .footer {
     background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
     padding: 2% 0 0 0;
