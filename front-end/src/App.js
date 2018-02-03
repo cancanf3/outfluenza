@@ -11,6 +11,7 @@ import WebFont from 'webfontloader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import { PieChart, Pie, Sector } from 'recharts';
 
 WebFont.load({
     google: {
@@ -18,47 +19,17 @@ WebFont.load({
     }
 });
 
-const Page = ({ title }) => (
-    <div className="App">
-        <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>{title}</h2>
-        </div>
-        <p className="App-intro">
-            This is the {title} page.
-        </p>
-        <p>
-            <Link to="/">Home</Link>
-        </p>
-        <p>
-            <Link to="/about">About</Link>
-        </p>
-        <p>
-            <Link to="/settings">Settings</Link>
-        </p>
-        <Notification />
-    </div>
-);
-
-const Home = (props) => (
-    <Page title="Home"/>
-);
-
-const About = (props) => (
-    <Page title="About"/>
-);
-
-const Settings = (props) => (
-    <Page title="Settings"/>
-);
-
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             tweets: 'loading',
-            showTweets: false
+            showTweets: false,
+            coordinates: {
+              "latitude": 0,
+              "longitude": 0
+            }
         };
     }
 
@@ -81,7 +52,8 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.callAPI();
+        this.getGeoLoc();
+        // this.callAPI();
     }
 
     toggleTweet() {
@@ -95,6 +67,18 @@ class App extends Component {
         if(zip.length > 4) {
             console.log("A real zip code");
         }
+    }
+
+    getGeoLoc() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition( (position) => {
+            var json = {
+              "latitude": position.coords.latitude,
+              "longitude": position.coords.longitude,
+            };
+            this.setState({coordinates:json})
+        });
+      }
     }
 
     render() {
