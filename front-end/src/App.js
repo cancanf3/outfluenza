@@ -42,23 +42,6 @@ class App extends Component {
         };
     }
 
-    // callAPI(){
-    //     let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
-    //     fetch('http://api.flutrack.org/?s=flu').then(function (response) {
-    //         return response.json();
-    //     }).then(result => {
-    //         result.map(tweet => {
-    //             fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
-    //             .then(function (response) {
-    //                 return response.json();
-    //             }).then(result => {
-    //                 tweet.location = result;
-    //                 console.log(result);
-    //             })
-    //         })
-    //         this.setState({tweets:result})
-    //     });
-    // }
 
     getGeoLoc() {
         console.log("entra")
@@ -71,7 +54,7 @@ class App extends Component {
                 this.setState({coordinates:json})
                 this.getTweets();
                 this.getDoctors();
-                this.getCdc();
+                this.getCDC();
             });
         }
     }
@@ -85,19 +68,6 @@ class App extends Component {
             return data.json();
         }).then(data => {
             this.setState({tweets:data});
-        });
-
-    }
-
-    getCdc() {
-        fetch('https://86c8f266.ngrok.io/rest/mangohacks/cdc/', {
-            method: 'POST',
-            body: JSON.stringify(this.state.coordinates),
-            headers: {'Content-Type': 'application/json'}
-        }).then( data => {
-            return data.json();
-        }).then(data => {
-            this.setState({cdc:data});
         });
 
     }
@@ -234,12 +204,12 @@ class App extends Component {
                                     data={dunut_data}
                                     cx={220}
                                     cy={200}
-                                    startAngle={180}
-                                    endAngle={0}
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    fill="#3abdcf"
-                                    paddingAngle={5}
+                                    startAngle={300}
+                                    endAngle={20}
+                                    innerRadius={120}
+                                    outerRadius={150}
+                                    fill="#FE1A1A"
+                                    paddingAngle={0}
                                     >
                                 </Pie>
                             </PieChart>
