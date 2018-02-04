@@ -5,10 +5,10 @@ class Tweet extends Component {
 
     render() {
         return(
-            <div className="tweet">
-                <h4><b>{this.props.user}</b></h4>
+            <blockquote className="twitter-tweet">
                 <p>{this.props.text}</p>
-            </div>
+                <a><strong> - {this.props.user}</strong></a>
+            </blockquote>
         );
     }
 }
