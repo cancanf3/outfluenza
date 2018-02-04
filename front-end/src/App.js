@@ -120,6 +120,11 @@ class App extends Component {
         }
     }
 
+    toggleInfo = (e) => {
+        var newZip = document.getElementById('zipcode').value;
+        // Haz tu call aqui
+    }
+
     render() {
 
         var donut_data = {
@@ -184,10 +189,15 @@ class App extends Component {
                                         <h3>Keeping the flu away from our communities.</h3>
                                         <TextField
                                             className="zipcode"
+                                            id='zipcode'
                                             hintText={this.state.cdc.postal}
                                             hintStyle={{ width: '100%', textAlign: 'center' }}
                                             inputStyle={{ width: '100%', textAlign: 'center' }}
                                         />
+                                        <RaisedButton
+                                            label="Change"
+                                            style={{width:'4%', marginLeft:'1%'}}
+                                            onClick={this.submitZip}/>
                                     </div>
                                 </div>
                                 <div className='division'>
