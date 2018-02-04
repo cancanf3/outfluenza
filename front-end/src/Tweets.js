@@ -20,28 +20,31 @@ class Tweets extends Component {
         var tweets = this.props.tweets;
 
         return (
-            <div className='feed'>
-              <MuiThemeProvider>
-                {/* <input
-                    type='text'
-                    value={this.state.search}
-                    onChange={this.callFluLocation}
-                />
-                <br></br>
-                <br></br> */}
-                {
-                    (this.props.tweets !== 'loading' ?
-                        this.props.tweets.map(
-                            tweet =>
-                            <Tweet
-                                user={tweet.user_name}
-                                text={tweet.tweet_text}
-                            />
-                        ) : <CircularProgress mode="indeterminate" />)}
-                    </MuiThemeProvider>
-            </div>
-        );
+            <div className='division'>
+                <h1>Twitter Feed: Influence-za </h1>
+                <div className='feed'>
+                    <MuiThemeProvider>
+                        {/* <input
+                            type='text'
+                            value={this.state.search}
+                            onChange={this.callFluLocation}
+                        />
+                        <br></br>
+                        <br></br> */}
+                        {
+                            (this.props.tweets !== 'loading' ?
+                            this.props.tweets.map(
+                                tweet =>
+                                <Tweet
+                                    user={tweet.user_name}
+                                    text={tweet.tweet_text}
+                                />
+                            ) : <CircularProgress mode="indeterminate" />)}
+                        </MuiThemeProvider>
+                    </div>
+                </div>
+            );
+        }
     }
-}
 
-export default Tweets;
+    export default Tweets;
