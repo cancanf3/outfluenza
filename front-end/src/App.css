@@ -23,7 +23,7 @@
 }
 
 .official_source {
-  color: #000; 
+  color: #000;
   text-decoration: none;
   font-weight: bold;
 }
@@ -105,7 +105,8 @@ body {
   z-index: 999;
 }
 .footer {
-    background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
+    background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); 
+    color: rgb(255, 255, 255);
     padding: 2% 0 0 0;
     margin-bottom: 0;
     height: 10vh;

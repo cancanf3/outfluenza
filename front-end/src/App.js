@@ -8,6 +8,7 @@ import './App.css';
 import Notification from './notification.js';
 import Footer from './Footer.js';
 import Tweets from './Tweets.js';
+import Doctors from './Doctors.js'
 import WebFont from 'webfontloader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -39,7 +40,7 @@ class App extends Component {
             },
             cdc: 'cdc',
             toggleLoad:false,
-            doctors:'doctors'
+            doctors:'loading'
         };
     }
 
@@ -194,11 +195,8 @@ class App extends Component {
                                 <h2> One more thing goes here </h2>
                             </div>
                             <div className='division'>
-                                <div className='community'>
-                                    <img src={prescription} className="prescription" alt="prescription" />
-                                    <h2>Your community is % infected</h2>
-                                    <h4>Some more data</h4>
-                                </div>
+                                <h1>Treat the flu: Doctors close to you</h1>
+                                <Doctors doctors={this.state.doctors}/>
                             </div>
                             <div className='division infected'>
                             <PieChart width={600} height={300}>
