@@ -60,6 +60,25 @@ class App extends Component {
         }
     }
 
+    getGeoFromZip(zipcode) {
+      fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
+          method: 'POST',
+          body: JSON.stringify({"zipcode":zipcode}),
+          headers: {'Content-Type': 'application/json'}
+      }).then( data => {
+          return data.json();
+      }).then(data => {
+        let json = {
+            "latitude": data.lat,
+            "longitude": data.lng
+        };
+        this.setState({coordinates:json})
+        this.getTweets();
+        this.getDoctors();
+        this.getCDC();
+      });
+    }
+
     getTweets() {
         fetch('https://86c8f266.ngrok.io/rest/mangohacks/tweets/', {
             method: 'POST',
