@@ -6,6 +6,7 @@ import prescription from './aux/prescription.svg';
 import like from './aux/like.svg';
 import './App.css';
 import Notification from './notification.js';
+import Footer from './Footer.js';
 import Tweets from './Tweets.js';
 import WebFont from 'webfontloader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -230,11 +231,7 @@ class App extends Component {
                             <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
                             {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
                         </div>
-                        <div className='division'>
-                            <div className='footer'>
-                                <h4>Made with <img src={like} className="like" alt="like" /></h4>
-                            </div>
-                        </div>
+                        <Footer like={like}/>
                     </div>}
                 </MuiThemeProvider>
             </div>
