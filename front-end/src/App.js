@@ -13,6 +13,7 @@ import WebFont from 'webfontloader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
@@ -40,7 +41,8 @@ class App extends Component {
             },
             cdc: 'cdc',
             toggleLoad:false,
-            doctors:'loading'
+            doctors:'loading',
+            enableButton: false
         };
     }
 
@@ -123,6 +125,16 @@ class App extends Component {
     submitZip = (e) => {
         var newZip = document.getElementById('zipcode').value;
         // Haz tu call aqui
+        console.log(newZip);
+    }
+
+    enableButton = (e) => {
+        if(e.target.value.length > 3) {
+            this.setState({enableButton:true});
+        }
+        else {
+            this.setState({enableButton:false});
+        }
     }
 
     render() {
@@ -193,11 +205,14 @@ class App extends Component {
                                             hintText={this.state.cdc.postal}
                                             hintStyle={{ width: '100%', textAlign: 'center' }}
                                             inputStyle={{ width: '100%', textAlign: 'center' }}
+                                            onChange={this.enableButton}
                                         />
-                                        <RaisedButton
+                                        <FlatButton
                                             label="Change"
                                             style={{width:'4%', marginLeft:'1%'}}
-                                            onClick={this.submitZip}/>
+                                            onClick={this.submitZip}
+                                            disabled={!this.state.enableButton}
+                                        />
                                     </div>
                                 </div>
                                 <div className='division'>
