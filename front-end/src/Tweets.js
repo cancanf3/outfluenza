@@ -32,12 +32,13 @@ class Tweets extends Component {
                         <br></br>
                         <br></br> */}
                         {
-                            (this.props.tweets !== 'loading' ?
+                            (this.props.stage !== 'loading' ?
                             this.props.tweets.map(
                                 tweet =>
                                 <Tweet
                                     user={tweet.user_name}
                                     text={tweet.tweet_text}
+                                    distance={tweet.distance}
                                 />
                             ) : <CircularProgress mode="indeterminate" />)}
                         </MuiThemeProvider>

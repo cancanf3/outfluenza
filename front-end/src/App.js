@@ -192,9 +192,6 @@ class App extends Component {
                                 </div>
                             </div>
                             <div className='division'>
-                                <h2> One more thing goes here </h2>
-                            </div>
-                            <div className='division'>
                                 <h1>Treat the flu: Doctors close to you</h1>
                                 <Doctors doctors={this.state.doctors}/>
                             </div>
@@ -227,7 +224,7 @@ class App extends Component {
                         </div>
 
                         <div className='tweets'>
-                            <Tweets tweets={this.state.tweets}/>
+                            <Tweets stage={this.state.tweets} tweets={this.state.tweets.nearbyTweets}/>
                         </div>
                         <Footer like={like}/>
                     </div>}

@@ -7,7 +7,7 @@ class Tweet extends Component {
         return(
             <blockquote className="twitter-tweet">
                 <p>{this.props.text}</p>
-                <a><strong> - {this.props.user}</strong></a>
+                <a><strong> - {this.props.user}</strong> - {this.props.distance.toFixed(1)} miles away</a>
             </blockquote>
         );
     }
