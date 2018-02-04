@@ -41,8 +41,13 @@ class App extends Component {
             cdc: 'cdc',
             toggleLoad:false,
             doctors:'loading',
-            zip:'zipcode'
+            zip:'zipcode',
+            text: 'zipcode'
         };
+    }
+
+    handleChange = ( e ) => {
+      this.state.zip = e.target.value
     }
 
     getGeoLoc() {
@@ -60,7 +65,8 @@ class App extends Component {
         }
     }
 
-    getGeoFromZip(zipcode) {
+    getGeoFromZip() {
+      var zipcode = this.state.zip;
       fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
           method: 'POST',
           body: JSON.stringify({"zipcode":zipcode}),
@@ -139,6 +145,11 @@ class App extends Component {
         }
     }
 
+    submitZip = (e) => {
+        var newZip = document.getElementById('zipcode').value;
+        // Haz tu call aqui
+    }
+
     render() {
 
         var donut_data = {
@@ -202,12 +213,17 @@ class App extends Component {
                                         <h1>Outfluenza.</h1>
                                         <h3>Keeping the flu away from our communities.</h3>
                                         <TextField
+                                            hintText={this.state.cdc.postal}
+                                            onChange={ this.handleChange }
                                             className="zipcode"
-                                            onChange={(zip) => this.setState({zip})}
-                                            value={this.state.zip}
+                                            id='zipcode'
                                             hintStyle={{ width: '100%', textAlign: 'center' }}
                                             inputStyle={{ width: '100%', textAlign: 'center' }}
                                         />
+                                        <RaisedButton
+                                            label="Change"
+                                            style={{width:'4%', marginLeft:'1%'}}
+                                            onClick={this.getGeoFromZip}/>
                                     </div>
                                 </div>
                                 <div className='division'>
