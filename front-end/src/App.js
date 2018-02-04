@@ -17,6 +17,7 @@ import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
 
+
 WebFont.load({
     google: {
         families: ['Open Sans:300,400', 'sans-serif']
@@ -37,14 +38,12 @@ class App extends Component {
             },
             cdc: 'cdc',
             toggleLoad:false,
-            cdc: 'cdc',
             doctors:'doctors'
         };
     }
 
 
     getGeoLoc() {
-        console.log("entra")
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( (position) => {
                 let json = {
@@ -74,8 +73,6 @@ class App extends Component {
 
 
     getDoctors() {
-        console.log(this.state.coordinates);
-        console.log(this.state.flag);
         fetch('https://86c8f266.ngrok.io/rest/mangohacks/doctors/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
@@ -88,8 +85,6 @@ class App extends Component {
     }
 
     getCDC() {
-        console.log(this.state.coordinates);
-        console.log(this.state.flag);
         fetch('https://86c8f266.ngrok.io/rest/mangohacks/cdc/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
@@ -169,36 +164,42 @@ class App extends Component {
         return (
             <div className="App">
                 <MuiThemeProvider>
+                  <SnowStorm
+                    className="snow"
+                    snowColor='black' useMeltEffect={true} vMaxX={10}
+                    useTwinkleEffect={true} excludeMobile={false}
+                    />
                     {this.state.toggleLoad ?
                       <div> <br /> <br /> <br /> <br /> <br/>
                       <h2>Gathering your data.</h2>
-                      <SnowStorm snowColor='black' useMeltEffect={true} vMaxX={10} useTwinkleEffect={true} excludeMobile={false}/>
                       <CircularProgress
-                      style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div>:
-                      <div className="App">
-                        <div>
-                            <img src={logo} className="App-logo" alt="logo" />
-                            <h2>Outfluenza</h2>
-                        </div>
-                        <div className='division'>
-                            <div className='personal'>
-                                <img src={pain} className="pain" alt="pain" />
-                                <h2>You are % likely to contract the flu</h2>
-                                <h4>Some more data</h4>
-                            </div>
-                        </div>
-                        <div className='division'>
-                            <h2> One more thing goes here </h2>
-                        </div>
-                        <div className='division'>
-                            <div className='community'>
-                                <img src={prescription} className="prescription" alt="prescription" />
-                                <h2>Your community is % infected</h2>
-                                <h4>Some more data</h4>
-                            </div>
-                        </div>
-
-                        <div className='division infected'>
+                          style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div> :
+                                          <div className="App">
+                                              <div className='main'>
+                                                  <div className='logo'>
+                                                      <img src={logo} className="App-logo" alt="logo" />
+                                                      <h1>Outfluenza.</h1>
+                                                      <h3>Keeping the flu away from our communities.</h3>
+                                                  </div>
+                                              </div>
+                                              <div className='division'>
+                                                  <div className='personal'>
+                                                      <img src={pain} className="pain" alt="pain" />
+                                                      <h2>You are % likely to contract the flu</h2>
+                                                      <h4>Some more data</h4>
+                                                  </div>
+                                              </div>
+                                              <div className='division'>
+                                                  <h2> One more thing goes here </h2>
+                                              </div>
+                                              <div className='division'>
+                                                  <div className='community'>
+                                                      <img src={prescription} className="prescription" alt="prescription" />
+                                                      <h2>Your community is % infected</h2>
+                                                      <h4>Some more data</h4>
+                                                  </div>
+                                              </div>
+                                              <div className='division infected'>
                             <PieChart width={600} height={300}>
                                 <Pie
                                     data={dunut_data}
@@ -232,4 +233,4 @@ class App extends Component {
     }
 }
 
-export default App;
+            export default App;
