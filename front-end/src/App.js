@@ -14,12 +14,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { PieChart, Pie, Sector } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
+import SnowStorm from 'react-snowstorm';
+
 
 WebFont.load({
     google: {
         families: ['Open Sans:300,400', 'sans-serif']
     }
 });
+
 
 class App extends Component {
 
@@ -146,6 +149,7 @@ class App extends Component {
                     {this.state.toggleLoad ?
                       <div> <br /> <br /> <br /> <br /> <br/>
                       <h2>Gathering your data.</h2>
+                      <SnowStorm snowColor='black' useMeltEffect={true} vMaxX={10} useTwinkleEffect={true}/>
                       <CircularProgress
                       style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div>:
                       <div className="App">
