@@ -13,7 +13,14 @@
   min-width: 100%;
   background-size: cover;
 }
-
+.chart{
+  margin-top: 1px;
+  margin-bottom: 10px;
+}
+.disclaimer{
+  font-style: italic;
+  margin-top: 2px;
+}
 .logo {
   padding: 20% 0 0 0;
 }

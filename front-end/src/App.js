@@ -15,7 +15,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell } from 'recharts';
+import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
@@ -43,7 +43,8 @@ class App extends Component {
             toggleLoad:false,
             doctors:'loading',
             zip:'zipcode',
-            text: 'zipcode'
+            text: 'zipcode',
+            trends: [],
         };
     }
 
@@ -62,6 +63,7 @@ class App extends Component {
                 this.getTweets();
                 this.getDoctors();
                 this.getCDC();
+                this.getTrends();
             });
         }
     }
@@ -82,6 +84,7 @@ class App extends Component {
             this.setState({coordinates:json})
             this.getTweets();
             this.getDoctors();
+            this.getTrends();
             this.getCDC();
         });
     }
@@ -121,6 +124,22 @@ class App extends Component {
         }).then( data => { return data.json(); }).then(data => {
             this.setState({cdc:data});
             this.setState({toggleLoad:false});
+        });
+
+    }
+
+    getTrends() {
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/googletrends/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
+
+        }).then( data => { return data.json(); }).then(data => {
+            var arr = [];
+            for(var key in data.flu) {
+              arr.push({"name":key, "rating":data.flu[key]});
+            }
+            this.setState({trends:arr});
         });
 
     }
@@ -242,9 +261,18 @@ class App extends Component {
                                 </div>
                                 <div className='division'>
                                     <div className='personal'>
-                                        <img src={pain} className="pain" alt="pain" />
-                                        <h2>You are % likely to contract the flu</h2>
-                                        <h4>Some more data</h4>
+                                      <h2 className="chart">Region based flu search trends</h2>
+                                          <LineChart width={750} height={350} data={this.state.trends}
+                                            margin={{top: 0, right: 30, left: 5, bottom: 5}}>
+                                            <XAxis stroke="white"/>
+                                            <CartesianGrid strokeDasharray="3 3"/>
+                                           <YAxis stroke="white"/>
+                                           <Tooltip name="name"/>
+                                           <Line type="monotone" dataKey="rating" stroke="black" activeDot={{r: 8}}/>
+                                           <Line type="monotone" dataKey="name" stroke="black" />
+                                            <Line stroke="white" />
+                                        </LineChart>
+                                        <h4 className="disclaimer">sourced from google trends</h4>
                                     </div>
                                 </div>
                                 <div className='division'>
