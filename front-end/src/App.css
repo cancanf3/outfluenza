@@ -4,6 +4,18 @@
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 0px;
+  position: relative;
+  z-index: 3;
+}
+
+.main {
+  height: 100Vh;
+  min-width: 100%;
+  background-size: cover;
+}
+
+.logo {
+  padding: 20% 0 0 0;
 }
 
 .button {
@@ -12,7 +24,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 120px;
 }
 
 .App-header {
@@ -44,6 +56,8 @@ body {
     box-sizing: content-box;
     display: block;
     margin: 0 0 0 0;
+    position: relative;
+    z-index: 1;
 }
 
 .personal {
@@ -53,6 +67,8 @@ body {
     height: 50vh;
     min-width: 100%;
     background-size: cover;
+    z-index: 2;
+    position: relative;
 }
 
 .community {
@@ -78,6 +94,10 @@ body {
 
 }
 
+.snow {
+  position: relative;
+  z-index: 999;
+}
 .footer {
     background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
     padding: 2% 0 0 0;
