@@ -174,32 +174,32 @@ class App extends Component {
                       <h2>Gathering your data.</h2>
                       <CircularProgress
                           style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div> :
-                                          <div className="App">
-                                              <div className='main'>
-                                                  <div className='logo'>
-                                                      <img src={logo} className="App-logo" alt="logo" />
-                                                      <h1>Outfluenza.</h1>
-                                                      <h3>Keeping the flu away from our communities.</h3>
-                                                  </div>
-                                              </div>
-                                              <div className='division'>
-                                                  <div className='personal'>
-                                                      <img src={pain} className="pain" alt="pain" />
-                                                      <h2>You are % likely to contract the flu</h2>
-                                                      <h4>Some more data</h4>
-                                                  </div>
-                                              </div>
-                                              <div className='division'>
-                                                  <h2> One more thing goes here </h2>
-                                              </div>
-                                              <div className='division'>
-                                                  <div className='community'>
-                                                      <img src={prescription} className="prescription" alt="prescription" />
-                                                      <h2>Your community is % infected</h2>
-                                                      <h4>Some more data</h4>
-                                                  </div>
-                                              </div>
-                                              <div className='division infected'>
+                        <div className="App">
+                            <div className='main'>
+                                <div className='logo'>
+                                    <img src={logo} className="App-logo" alt="logo" />
+                                    <h1>Outfluenza.</h1>
+                                    <h3>Keeping the flu away from our communities.</h3>
+                                </div>
+                            </div>
+                            <div className='division'>
+                                <div className='personal'>
+                                    <img src={pain} className="pain" alt="pain" />
+                                    <h2>You are % likely to contract the flu</h2>
+                                    <h4>Some more data</h4>
+                                </div>
+                            </div>
+                            <div className='division'>
+                                <h2> One more thing goes here </h2>
+                            </div>
+                            <div className='division'>
+                                <div className='community'>
+                                    <img src={prescription} className="prescription" alt="prescription" />
+                                    <h2>Your community is % infected</h2>
+                                    <h4>Some more data</h4>
+                                </div>
+                            </div>
+                            <div className='division infected'>
                             <PieChart width={600} height={300}>
                                 <Pie
                                     data={dunut_data}
