@@ -161,7 +161,6 @@ class App extends Component {
             rotation: Math.PI,
         }
 
-
         return (
             <div className="App">
                 <MuiThemeProvider>
