@@ -48,7 +48,7 @@ class App extends Component {
     }
 
     handleChange = ( e ) => {
-      this.state.zip = e.target.value
+        this.state.zip = e.target.value
     }
 
     getGeoLoc() {
@@ -67,22 +67,23 @@ class App extends Component {
     }
 
     getGeoFromZip(zipcode) {
-      fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
-          method: 'POST',
-          body: JSON.stringify({"zipcode":zipcode}),
-          headers: {'Content-Type': 'application/json'}
-      }).then( data => {
-          return data.json();
-      }).then(data => {
-        let json = {
-            "latitude": data.lat,
-            "longitude": data.lng
-        };
-        this.setState({coordinates:json})
-        this.getTweets();
-        this.getDoctors();
-        this.getCDC();
-      });
+        this.setState({toggleLoad : true});
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
+            method: 'POST',
+            body: JSON.stringify({"zipcode":zipcode}),
+            headers: {'Content-Type': 'application/json'}
+        }).then( data => {
+            return data.json();
+        }).then(data => {
+            let json = {
+                "latitude": data.lat,
+                "longitude": data.lng
+            };
+            this.setState({coordinates:json})
+            this.getTweets();
+            this.getDoctors();
+            this.getCDC();
+        });
     }
 
     getTweets() {
@@ -148,11 +149,11 @@ class App extends Component {
     submitZip = (e) => {
         var newZip = document.getElementById('zipcode').value;
         // Haz tu call aqui
-        console.log(newZip);
+        this.getGeoFromZip(newZip);
     }
 
     enableButton = (e) => {
-        if(e.target.value.length > 3) {
+        if(e.target.value.length > 4) {
             this.setState({enableButton:true});
         }
         else {
@@ -222,6 +223,21 @@ class App extends Component {
                                         <img src={logo} className="App-logo" alt="logo" />
                                         <h1>Outfluenza.</h1>
                                         <h3>Keeping the flu away from our communities.</h3>
+                                        <TextField
+                                            hintText={this.state.cdc.postal}
+                                            onChange={ this.handleChange }
+                                            className="zipcode"
+                                            id='zipcode'
+                                            hintStyle={{ width: '100%', textAlign: 'center' }}
+                                            inputStyle={{ width: '100%', textAlign: 'center' }}
+                                            onChange={this.enableButton}
+                                        />
+                                        <FlatButton
+                                            label="Change"
+                                            style={{width:'4%', marginLeft:'1%'}}
+                                            onClick={this.submitZip}
+                                            disabled={!this.state.enableButton}
+                                        />
                                     </div>
                                 </div>
                                 <div className='division'>
