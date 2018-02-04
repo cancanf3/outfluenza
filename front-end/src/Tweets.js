@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Tweet from './Tweet.js';
 import CircularProgress from 'material-ui/CircularProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import './Tweets.css';
 
 class Tweets extends Component {
 
@@ -19,7 +20,7 @@ class Tweets extends Component {
         var tweets = this.props.tweets;
 
         return (
-            <div>
+            <div className='feed'>
               <MuiThemeProvider>
                 {/* <input
                     type='text'
