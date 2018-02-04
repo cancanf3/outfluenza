@@ -23,3 +23,10 @@ Fight the Flu with crowdsourced awareness
 - Jose Pena
 - Navon Francis
 - Scott Suarez
+
+
+David and navon's tasks:
+- fix load
+- charts for Data
+- calculate likeliness
+- scroll through nearest tweets and doctors
