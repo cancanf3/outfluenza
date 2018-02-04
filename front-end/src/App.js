@@ -120,7 +120,7 @@ class App extends Component {
         }
     }
 
-    toggleInfo = (e) => {
+    submitZip = (e) => {
         var newZip = document.getElementById('zipcode').value;
         // Haz tu call aqui
     }
