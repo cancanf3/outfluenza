@@ -15,7 +15,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell, LineChart, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
+import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
@@ -260,13 +260,18 @@ class App extends Component {
                                 </div>
                                 <div className='division'>
                                     <div className='personal'>
-                                          <LineChart width={650} height={350} data={this.state.trends}
-                                              margin={{top: 0, right: 30, left: 5, bottom: 5}}>
-                                         <YAxis/>
-                                         <CartesianGrid strokeDasharray="3 3"/>
-                                         <Tooltip dataKey="name"/>
-                                         <Line type="monotone" dataKey="rating" stroke="white" activeDot={{r: 8}}/>
+                                      <h2 className="chart">Local search trends</h2>
+                                          <LineChart width={750} height={350} data={this.state.trends}
+                                            margin={{top: 0, right: 30, left: 5, bottom: 5}}>
+                                            <XAxis stroke="white"/>
+                                            <CartesianGrid strokeDasharray="3 3"/>
+                                           <YAxis stroke="white"/>
+                                           <Tooltip name="name"/>
+                                           <Line type="monotone" dataKey="rating" stroke="black" activeDot={{r: 8}}/>
+                                           <Line type="monotone" dataKey="name" stroke="black" />
+                                            <Line stroke="white" />
                                         </LineChart>
+                                        <h4 className="disclaimer">sourced from google trends</h4>
                                     </div>
                                 </div>
                                 <div className='division'>
