@@ -84,6 +84,7 @@ class App extends Component {
             this.setState({coordinates:json})
             this.getTweets();
             this.getDoctors();
+            this.getTrends();
             this.getCDC();
         });
     }
@@ -260,7 +261,7 @@ class App extends Component {
                                 </div>
                                 <div className='division'>
                                     <div className='personal'>
-                                      <h2 className="chart">Local search trends</h2>
+                                      <h2 className="chart">Region based flu search trends</h2>
                                           <LineChart width={750} height={350} data={this.state.trends}
                                             margin={{top: 0, right: 30, left: 5, bottom: 5}}>
                                             <XAxis stroke="white"/>
