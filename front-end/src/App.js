@@ -149,7 +149,7 @@ class App extends Component {
                     {this.state.toggleLoad ?
                       <div> <br /> <br /> <br /> <br /> <br/>
                       <h2>Gathering your data.</h2>
-                      <SnowStorm snowColor='black' useMeltEffect={true} vMaxX={10} useTwinkleEffect={true}/>
+                      <SnowStorm snowColor='black' useMeltEffect={true} vMaxX={10} useTwinkleEffect={true} excludeMobile={false}/>
                       <CircularProgress
                       style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div>:
                       <div className="App">
