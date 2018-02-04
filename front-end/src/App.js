@@ -66,7 +66,7 @@ class App extends Component {
         }
     }
 
-    getGeoFromZip() {
+    getGeoFromZip(zipcode) {
       fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
           method: 'POST',
           body: JSON.stringify({"zipcode":zipcode}),
@@ -148,11 +148,11 @@ class App extends Component {
     submitZip = (e) => {
         var newZip = document.getElementById('zipcode').value;
         // Haz tu call aqui
-        console.log(newZip);
+        this.getGeoFromZip(newZip);
     }
 
     enableButton = (e) => {
-        if(e.target.value.length > 3) {
+        if(e.target.value.length > 4) {
             this.setState({enableButton:true});
         }
         else {
@@ -234,13 +234,9 @@ class App extends Component {
                                         <FlatButton
                                             label="Change"
                                             style={{width:'4%', marginLeft:'1%'}}
-<<<<<<< HEAD
-                                            onClick={this.getGeoFromZip}/>
-=======
                                             onClick={this.submitZip}
                                             disabled={!this.state.enableButton}
                                         />
->>>>>>> 00463c31ee76c4e94d6665e39bf398253e1c853a
                                     </div>
                                 </div>
                                 <div className='division'>
