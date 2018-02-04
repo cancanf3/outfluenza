@@ -15,6 +15,8 @@ class Doctors extends Component {
                         name={doctor.Name}
                         location={doctor.Location}
                         availability={doctor.Availability}
+                        distance={doctor.Distance}
+                        contact={doctor.Phone}
                     />
                 ) : null }
                 </MuiThemeProvider>

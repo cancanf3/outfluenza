@@ -1,5 +1,13 @@
 .pin {
     height: 20px;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.call {
+    height: 20px;
+    margin-right: 1%;
+    margin-top: 1%;
 }
 
 .doctor {
