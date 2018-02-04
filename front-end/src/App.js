@@ -198,22 +198,25 @@ class App extends Component {
                                 <h1>Treat the flu: Doctors close to you</h1>
                                 <Doctors doctors={this.state.doctors}/>
                             </div>
-                            <div className='division infected'>
-                            <PieChart width={600} height={300}>
-                                <Pie
-                                    data={dunut_data}
-                                    cx={220}
-                                    cy={200}
-                                    startAngle={300}
-                                    endAngle={0}
-                                    innerRadius={110}
-                                    outerRadius={150}
-                                    fill="#FE1A1A"
-                                    paddingAngle={0}
-                                    >
-                                </Pie>
-                            </PieChart>
+                            <div className='division infected statesInfo'>
+                            <div className='gauge'>
+                              <PieChart width={340} height={320}>
+                                  <Pie
+                                      data={dunut_data}
+                                      cx={175}
+                                      cy={200}
+                                      startAngle={360}
+                                      endAngle={0}
+                                      innerRadius={60}
+                                      outerRadius={80}
+                                      fill="#FC17B7"
+                                      paddingAngle={0}
+                                      >
+                                  </Pie>
+                              </PieChart>
+                            </div>
                             <div>
+                              <h2> Infection Level {parseInt(this.state.cdc.activity_level)}/10 </h2>
                               <h2>{this.state.cdc.statename} has a {this.state.cdc.activity_level_label} level of infection</h2>
 
                               <a href={this.state.cdc.url} class="official_source">

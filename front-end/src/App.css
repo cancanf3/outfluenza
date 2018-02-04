@@ -28,6 +28,11 @@
   font-weight: bold;
 }
 
+.statesInfo {
+  display: block;
+}
+
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 120px;
@@ -114,6 +119,16 @@ body {
     background-size: cover;
 }
 
+.guage {
+
+}
+
+.recharts-wrapper {
+  margin: auto;
+  width: 600px;
+  height: 280px;
+}
+
 .pain {
     height: 80px;
 }
@@ -127,7 +142,7 @@ body {
 }
 
 .infected {
-    display: flex;
+    display: block;
     align-items: center;
 }
 
