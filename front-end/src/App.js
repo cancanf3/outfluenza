@@ -218,6 +218,7 @@ class App extends Component {
                               </PieChart>
                             </div>
                             <div>
+                              <h2> Infection Level {parseInt(this.state.cdc.activity_level)}/10 </h2>
                               <h2>{this.state.cdc.statename} has a {this.state.cdc.activity_level_label} level of infection</h2>
 
                               <a href={this.state.cdc.url} class="official_source">
