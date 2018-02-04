@@ -42,23 +42,6 @@ class App extends Component {
         };
     }
 
-    // callAPI(){
-    //     let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
-    //     fetch('http://api.flutrack.org/?s=flu').then(function (response) {
-    //         return response.json();
-    //     }).then(result => {
-    //         result.map(tweet => {
-    //             fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
-    //             .then(function (response) {
-    //                 return response.json();
-    //             }).then(result => {
-    //                 tweet.location = result;
-    //                 console.log(result);
-    //             })
-    //         })
-    //         this.setState({tweets:result})
-    //     });
-    // }
 
     getGeoLoc() {
         if (navigator.geolocation) {
@@ -187,63 +170,63 @@ class App extends Component {
                     useTwinkleEffect={true} excludeMobile={false}
                     />
                     {this.state.toggleLoad ?
-                        <div> <br /> <br /> <br /> <br /> <br/>
-                        <h2>Gathering your data.</h2>
-                        <CircularProgress
-                            style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div> :
-                                            <div className="App">
-                                                <div className='main'>
-                                                    <div className='logo'>
-                                                        <img src={logo} className="App-logo" alt="logo" />
-                                                        <h1>Outfluenza.</h1>
-                                                        <h3>Keeping the flu away from our communities.</h3>
-                                                    </div>
-                                                </div>
-                                                <div className='division'>
-                                                    <div className='personal'>
-                                                        <img src={pain} className="pain" alt="pain" />
-                                                        <h2>You are % likely to contract the flu</h2>
-                                                        <h4>Some more data</h4>
-                                                    </div>
-                                                </div>
-                                                <div className='division'>
-                                                    <h2> One more thing goes here </h2>
-                                                </div>
-                                                <div className='division'>
-                                                    <div className='community'>
-                                                        <img src={prescription} className="prescription" alt="prescription" />
-                                                        <h2>Your community is % infected</h2>
-                                                        <h4>Some more data</h4>
-                                                    </div>
-                                                </div>
-                                                <div className='division infected'>
-                                                  <PieChart width={600} height={300}>
-                                                      <Pie
-                                                          data={donut_data}
-                                                          cx={220}
-                                                          cy={200}
-                                                          startAngle={180}
-                                                          endAngle={0}
-                                                          innerRadius={60}
-                                                          outerRadius={80}
-                                                          fill="#3abdcf"
-                                                          paddingAngle={5}
-                                                          >
-                                                      </Pie>
-                                                  </PieChart>
-                                                  <h2>{this.state.cdc.statename} has a {this.state.cdc.activity_level_label} level of infection</h2>
-                                                    </div>
-                                                    <div className='tweets'>
-                                                        <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
-                                                        {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
-                                                    </div>
-                                                    <div className='division'>
-                                                        <div className='footer'>
-                                                            <h4>Made with <img src={like} className="like" alt="like" /></h4>
-                                                        </div>
-                                                    </div>
-                                              </div>}
+                      <div> <br /> <br /> <br /> <br /> <br/>
+                      <h2>Gathering your data.</h2>
+                      <CircularProgress
+                          style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div> :
+                                          <div className="App">
+                                              <div className='main'>
+                                                  <div className='logo'>
+                                                      <img src={logo} className="App-logo" alt="logo" />
+                                                      <h1>Outfluenza.</h1>
+                                                      <h3>Keeping the flu away from our communities.</h3>
+                                                  </div>
+                                              </div>
+                                              <div className='division'>
+                                                  <div className='personal'>
+                                                      <img src={pain} className="pain" alt="pain" />
+                                                      <h2>You are % likely to contract the flu</h2>
+                                                      <h4>Some more data</h4>
+                                                  </div>
+                                              </div>
+                                              <div className='division'>
+                                                  <h2> One more thing goes here </h2>
+                                              </div>
+                                              <div className='division'>
+                                                  <div className='community'>
+                                                      <img src={prescription} className="prescription" alt="prescription" />
+                                                      <h2>Your community is % infected</h2>
+                                                      <h4>Some more data</h4>
+                                                  </div>
+                                              </div>
+                                              <div className='division infected'>
+                            <PieChart width={600} height={300}>
+                                <Pie
+                                    data={dunut_data}
+                                    cx={220}
+                                    cy={200}
+                                    startAngle={300}
+                                    endAngle={20}
+                                    innerRadius={120}
+                                    outerRadius={150}
+                                    fill="#FE1A1A"
+                                    paddingAngle={0}
+                                    >
+                                </Pie>
+                            </PieChart>
+                            <h2>{this.state.cdc.statename} has a {this.state.cdc.activity_level_label} level of infection</h2>
+                        </div>
 
+                        <div className='tweets'>
+                            <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
+                            {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                        </div>
+                        <div className='division'>
+                            <div className='footer'>
+                                <h4>Made with <img src={like} className="like" alt="like" /></h4>
+                            </div>
+                        </div>
+                    </div>}
                 </MuiThemeProvider>
             </div>
         );
