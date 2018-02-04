@@ -228,7 +228,7 @@ class App extends Component {
 
                         <div className='tweets'>
                             <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
-                            {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                            {this.state.showTweets ? <Tweets tweets={this.state.tweets.nearbyTweets}/> : null}
                         </div>
                         <Footer like={like}/>
                     </div>}
