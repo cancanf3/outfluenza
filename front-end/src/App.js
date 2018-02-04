@@ -15,7 +15,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell } from 'recharts';
+import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell, LineChart, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
@@ -43,7 +43,8 @@ class App extends Component {
             toggleLoad:false,
             doctors:'loading',
             zip:'zipcode',
-            text: 'zipcode'
+            text: 'zipcode',
+            trends: [],
         };
     }
 
@@ -62,6 +63,7 @@ class App extends Component {
                 this.getTweets();
                 this.getDoctors();
                 this.getCDC();
+                this.getTrends();
             });
         }
     }
@@ -121,6 +123,22 @@ class App extends Component {
         }).then( data => { return data.json(); }).then(data => {
             this.setState({cdc:data});
             this.setState({toggleLoad:false});
+        });
+
+    }
+
+    getTrends() {
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/googletrends/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
+
+        }).then( data => { return data.json(); }).then(data => {
+            var arr = [];
+            for(var key in data.flu) {
+              arr.push({"name":key, "rating":data.flu[key]});
+            }
+            this.setState({trends:arr});
         });
 
     }
@@ -242,9 +260,13 @@ class App extends Component {
                                 </div>
                                 <div className='division'>
                                     <div className='personal'>
-                                        <img src={pain} className="pain" alt="pain" />
-                                        <h2>You are % likely to contract the flu</h2>
-                                        <h4>Some more data</h4>
+                                          <LineChart width={650} height={350} data={this.state.trends}
+                                              margin={{top: 0, right: 30, left: 5, bottom: 5}}>
+                                         <YAxis/>
+                                         <CartesianGrid strokeDasharray="3 3"/>
+                                         <Tooltip dataKey="name"/>
+                                         <Line type="monotone" dataKey="rating" stroke="white" activeDot={{r: 8}}/>
+                                        </LineChart>
                                     </div>
                                 </div>
                                 <div className='division'>
