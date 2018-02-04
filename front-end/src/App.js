@@ -40,10 +40,10 @@ class App extends Component {
             },
             cdc: 'cdc',
             toggleLoad:false,
-            doctors:'loading'
+            doctors:'loading',
+            zip:'zipcode'
         };
     }
-
 
     getGeoLoc() {
         if (navigator.geolocation) {
@@ -203,7 +203,8 @@ class App extends Component {
                                         <h3>Keeping the flu away from our communities.</h3>
                                         <TextField
                                             className="zipcode"
-                                            hintText={this.state.cdc.postal}
+                                            onChange={(zip) => this.setState({zip})}
+                                            value={this.state.zip}
                                             hintStyle={{ width: '100%', textAlign: 'center' }}
                                             inputStyle={{ width: '100%', textAlign: 'center' }}
                                         />
