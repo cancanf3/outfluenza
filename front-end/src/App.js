@@ -12,7 +12,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, Sector } from 'recharts';
+import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
@@ -138,10 +138,29 @@ class App extends Component {
             ]
         };
 
+        var cool_data = [
+            {name: '18-24', uv: 31.47, pv: 2400, fill: '#8884d8'},
+            {name: '25-29', uv: 26.69, pv: 4567, fill: '#83a6ed'},
+            {name: '30-34', uv: 15.69, pv: 1398, fill: '#8dd1e1'},
+            {name: '35-39', uv: 8.22, pv: 9800, fill: '#82ca9d'},
+            {name: '40-49', uv: 8.63, pv: 3908, fill: '#a4de6c'},
+            {name: '50+', uv: 2.63, pv: 4800, fill: '#d0ed57'},
+            {name: 'unknow', uv: 6.67, pv: 4800, fill: '#ffc658'}
+        ];
+
+        const style = {
+            top: 0,
+            left: 350,
+            lineHeight: '24px'
+        };
+
+        var dunut_data = [{name: 'Infected', value: 80}, {name: 'Not Infected', value: 20}]
+
         var donut_options = {
             circumference: Math.PI,
             rotation: Math.PI,
         }
+
 
         return (
             <div className="App">
@@ -157,8 +176,6 @@ class App extends Component {
                             <img src={logo} className="App-logo" alt="logo" />
                             <h2>Outfluenza</h2>
                         </div>
-                        <hr/>
-                        <h2> Your community is % </h2>
                         <div className='division'>
                             <div className='personal'>
                                 <img src={pain} className="pain" alt="pain" />
@@ -167,13 +184,31 @@ class App extends Component {
                             </div>
                         </div>
                         <div className='division'>
+                            <h2> One more thing goes here </h2>
+                        </div>
+                        <div className='division'>
                             <div className='community'>
                                 <img src={prescription} className="prescription" alt="prescription" />
                                 <h2>Your community is % infected</h2>
                                 <h4>Some more data</h4>
                             </div>
                         </div>
-                        <Doughnut data={donut_data} options={donut_options}/>
+                        <div className='division infected'>
+                            <PieChart width={600} height={300}>
+                                <Pie
+                                    data={dunut_data}
+                                    cx={420}
+                                    cy={200}
+                                    startAngle={180}
+                                    endAngle={0}
+                                    innerRadius={60}
+                                    outerRadius={80}
+                                    fill="#3abdcf"
+                                    paddingAngle={5}>
+                                </Pie>
+                            </PieChart>
+                            <h2>Your community is 75% infected :(</h2>
+                            </div>
                         <div className='tweets'>
                             <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
                             {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}

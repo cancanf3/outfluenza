@@ -99,6 +99,12 @@ body {
     height: 20px;
 }
 
+.infected {
+    display: flex;
+    align-items: center;
+}
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(1080deg); }
