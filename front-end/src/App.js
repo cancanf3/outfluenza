@@ -120,9 +120,13 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="App">
                 <MuiThemeProvider>
-                    {this.state.toggleLoad ? <CircularProgress mode="indeterminate"/> :
+                    {this.state.toggleLoad ?
+                      <div> <br /> <br /> <br /> <br /> <br/>
+                      <h2>Gathering your data.</h2>
+                      <CircularProgress
+                      style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div>:
                       <div className="App">
                         <div>
                             <img src={logo} className="App-logo" alt="logo" />
