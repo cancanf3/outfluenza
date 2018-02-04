@@ -35,6 +35,7 @@ class App extends Component {
                 "latitude": 0,
                 "longitude": 0
             },
+            cdc: 'cdc',
             toggleLoad:false,
         };
     }
@@ -68,6 +69,7 @@ class App extends Component {
                 this.setState({coordinates:json})
                 this.getTweets();
                 this.getDoctors();
+                this.getCdc();
             });
         }
     }
@@ -81,6 +83,19 @@ class App extends Component {
             return data.json();
         }).then(data => {
             this.setState({tweets:data});
+        });
+
+    }
+
+    getCdc() {
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/cdc/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
+        }).then( data => {
+            return data.json();
+        }).then(data => {
+            this.setState({cdc:data});
         });
 
     }
