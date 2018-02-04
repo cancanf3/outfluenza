@@ -205,8 +205,8 @@ class App extends Component {
                                     cx={220}
                                     cy={200}
                                     startAngle={300}
-                                    endAngle={20}
-                                    innerRadius={120}
+                                    endAngle={0}
+                                    innerRadius={110}
                                     outerRadius={150}
                                     fill="#FE1A1A"
                                     paddingAngle={0}
