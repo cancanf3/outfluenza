@@ -12,7 +12,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend } from 'recharts';
+import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
@@ -36,29 +36,31 @@ class App extends Component {
                 "longitude": 0
             },
             toggleLoad:false,
+            cdc: 'cdc',
+            doctors:'doctors'
         };
     }
 
-    callAPI(){
-        let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
-        fetch('http://api.flutrack.org/?s=flu').then(function (response) {
-            return response.json();
-        }).then(result => {
-            result.map(tweet => {
-                fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
-                .then(function (response) {
-                    return response.json();
-                }).then(result => {
-                    tweet.location = result;
-                    console.log(result);
-                })
-            })
-            this.setState({tweets:result})
-            // console.log(this.state.tweets);
-        });
-    }
+    // callAPI(){
+    //     let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
+    //     fetch('http://api.flutrack.org/?s=flu').then(function (response) {
+    //         return response.json();
+    //     }).then(result => {
+    //         result.map(tweet => {
+    //             fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
+    //             .then(function (response) {
+    //                 return response.json();
+    //             }).then(result => {
+    //                 tweet.location = result;
+    //                 console.log(result);
+    //             })
+    //         })
+    //         this.setState({tweets:result})
+    //     });
+    // }
 
     getGeoLoc() {
+        console.log("entra")
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( (position) => {
                 let json = {
@@ -68,6 +70,7 @@ class App extends Component {
                 this.setState({coordinates:json})
                 this.getTweets();
                 this.getDoctors();
+                this.getCDC();
             });
         }
     }
@@ -95,7 +98,21 @@ class App extends Component {
             headers: {'Content-Type': 'application/json'}
 
         }).then( data => { return data.json(); }).then(data => {
-            console.log(data);
+            this.setState({doctors:data});
+        });
+
+    }
+
+    getCDC() {
+        console.log(this.state.coordinates);
+        console.log(this.state.flag);
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/cdc/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
+
+        }).then( data => { return data.json(); }).then(data => {
+            this.setState({cdc:data});
             this.setState({toggleLoad:false});
         });
 
@@ -133,8 +150,8 @@ class App extends Component {
                 ]
             }],
             labels: [
-                'Not Infected',
-                'Infected'
+                'Infection Level',
+                'Not Infected'
             ]
         };
 
@@ -154,12 +171,16 @@ class App extends Component {
             lineHeight: '24px'
         };
 
-        var dunut_data = [{name: 'Infected', value: 80}, {name: 'Not Infected', value: 20}]
+        var dunut_data = [{name: 'Infection Level', value: parseInt(this.state.cdc.activity_level)*10},
+                          {name: 'Not Infected', value: 100-parseInt(this.state.cdc.activity_level)*10}]
 
         var donut_options = {
             circumference: Math.PI,
             rotation: Math.PI,
         }
+
+        const RADIAN = Math.PI / 180;
+        const COLORS = ['#0088FE', '#00C49F'];
 
         return (
             <div className="App">
@@ -192,22 +213,25 @@ class App extends Component {
                                 <h4>Some more data</h4>
                             </div>
                         </div>
+
                         <div className='division infected'>
                             <PieChart width={600} height={300}>
                                 <Pie
                                     data={dunut_data}
-                                    cx={420}
+                                    cx={220}
                                     cy={200}
                                     startAngle={180}
                                     endAngle={0}
                                     innerRadius={60}
                                     outerRadius={80}
                                     fill="#3abdcf"
-                                    paddingAngle={5}>
+                                    paddingAngle={5}
+                                    >
                                 </Pie>
                             </PieChart>
-                            <h2>Your community is 75% infected :(</h2>
-                            </div>
+                            <h2>{this.state.cdc.statename} has a {this.state.cdc.activity_level_label} level of infection</h2>
+                        </div>
+
                         <div className='tweets'>
                             <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
                             {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
