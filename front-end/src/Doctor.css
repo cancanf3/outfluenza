@@ -1,0 +1,16 @@
+.pin {
+    height: 20px;
+}
+
+.doctor {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(227, 227, 227);
+    margin-right: 5%;
+    margin-bottom: 2%;
+    margin: 2% 1% 2% 1%;
+    padding: 0 17% 0 17%;
+    background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C);
+    color: rgb(255, 255, 255);
+}
