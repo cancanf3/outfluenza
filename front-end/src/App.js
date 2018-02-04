@@ -12,7 +12,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend } from 'recharts';
+import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell } from 'recharts';
 import {Doughnut} from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
 
@@ -36,28 +36,29 @@ class App extends Component {
                 "latitude": 0,
                 "longitude": 0
             },
+            cdc: 'cdc',
             toggleLoad:false,
+            doctors:'doctors'
         };
     }
 
-    callAPI(){
-        let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
-        fetch('http://api.flutrack.org/?s=flu').then(function (response) {
-            return response.json();
-        }).then(result => {
-            result.map(tweet => {
-                fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
-                .then(function (response) {
-                    return response.json();
-                }).then(result => {
-                    tweet.location = result;
-                    console.log(result);
-                })
-            })
-            this.setState({tweets:result})
-            // console.log(this.state.tweets);
-        });
-    }
+    // callAPI(){
+    //     let API_KEY = 'AIzaSyDYXLym9KjBK9xmcoDfTVjpZ24RJwYpZmg'
+    //     fetch('http://api.flutrack.org/?s=flu').then(function (response) {
+    //         return response.json();
+    //     }).then(result => {
+    //         result.map(tweet => {
+    //             fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + tweet.latitude + ',' + tweet.longitude + '&sensor=true&key=' + API_KEY)
+    //             .then(function (response) {
+    //                 return response.json();
+    //             }).then(result => {
+    //                 tweet.location = result;
+    //                 console.log(result);
+    //             })
+    //         })
+    //         this.setState({tweets:result})
+    //     });
+    // }
 
     getGeoLoc() {
         if (navigator.geolocation) {
@@ -69,6 +70,7 @@ class App extends Component {
                 this.setState({coordinates:json})
                 this.getTweets();
                 this.getDoctors();
+                this.getCDC();
             });
         }
     }
@@ -88,15 +90,25 @@ class App extends Component {
 
 
     getDoctors() {
-        console.log(this.state.coordinates);
-        console.log(this.state.flag);
         fetch('https://86c8f266.ngrok.io/rest/mangohacks/doctors/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
 
         }).then( data => { return data.json(); }).then(data => {
-            console.log(data);
+            this.setState({doctors:data});
+        });
+
+    }
+
+    getCDC() {
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/cdc/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
+
+        }).then( data => { return data.json(); }).then(data => {
+            this.setState({cdc:data});
             this.setState({toggleLoad:false});
         });
 
@@ -134,8 +146,8 @@ class App extends Component {
                 ]
             }],
             labels: [
-                'Not Infected',
-                'Infected'
+                'Infection Level',
+                'Not Infected'
             ]
         };
 
@@ -155,12 +167,16 @@ class App extends Component {
             lineHeight: '24px'
         };
 
-        var dunut_data = [{name: 'Infected', value: 80}, {name: 'Not Infected', value: 20}]
+        var dunut_data = [{name: 'Infection Level', value: parseInt(this.state.cdc.activity_level)*10},
+                          {name: 'Not Infected', value: 100-parseInt(this.state.cdc.activity_level)*10}]
 
         var donut_options = {
             circumference: Math.PI,
             rotation: Math.PI,
         }
+
+        const RADIAN = Math.PI / 180;
+        const COLORS = ['#0088FE', '#00C49F'];
 
         return (
             <div className="App">
@@ -174,62 +190,64 @@ class App extends Component {
                         <div> <br /> <br /> <br /> <br /> <br/>
                         <h2>Gathering your data.</h2>
                         <CircularProgress
-                            style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div>:
-                            <div className="App">
-                                <div className='main'>
-                                    <div className='logo'>
-                                        <img src={logo} className="App-logo" alt="logo" />
-                                        <h1>Outfluenza.</h1>
-                                        <h3>Keeping the flu away from our communities.</h3>
-                                    </div>
-                                </div>
-                                <div className='division'>
-                                    <div className='personal'>
-                                        <img src={pain} className="pain" alt="pain" />
-                                        <h2>You are % likely to contract the flu</h2>
-                                        <h4>Some more data</h4>
-                                    </div>
-                                </div>
-                                <div className='division'>
-                                    <h2> One more thing goes here </h2>
-                                </div>
-                                <div className='division'>
-                                    <div className='community'>
-                                        <img src={prescription} className="prescription" alt="prescription" />
-                                        <h2>Your community is % infected</h2>
-                                        <h4>Some more data</h4>
-                                    </div>
-                                </div>
-                                <div className='division infected'>
-                                    <PieChart width={600} height={300}>
-                                        <Pie
-                                            data={dunut_data}
-                                            cx={420}
-                                            cy={200}
-                                            startAngle={180}
-                                            endAngle={0}
-                                            innerRadius={60}
-                                            outerRadius={80}
-                                            fill="#3abdcf"
-                                            paddingAngle={5}>
-                                        </Pie>
-                                    </PieChart>
-                                    <h2>Your community is 75% infected :(</h2>
-                                    </div>
-                                    <div className='tweets'>
-                                        <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
-                                        {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
-                                    </div>
-                                    <div className='division'>
-                                        <div className='footer'>
-                                            <h4>Made with <img src={like} className="like" alt="like" /></h4>
-                                        </div>
-                                    </div>
-                                </div>}
-                            </MuiThemeProvider>
-                        </div>
-                    );
-                }
-            }
+                            style={'width: 100%'} mode="indeterminate" size={150} thickness={7}/> </div> :
+                                            <div className="App">
+                                                <div className='main'>
+                                                    <div className='logo'>
+                                                        <img src={logo} className="App-logo" alt="logo" />
+                                                        <h1>Outfluenza.</h1>
+                                                        <h3>Keeping the flu away from our communities.</h3>
+                                                    </div>
+                                                </div>
+                                                <div className='division'>
+                                                    <div className='personal'>
+                                                        <img src={pain} className="pain" alt="pain" />
+                                                        <h2>You are % likely to contract the flu</h2>
+                                                        <h4>Some more data</h4>
+                                                    </div>
+                                                </div>
+                                                <div className='division'>
+                                                    <h2> One more thing goes here </h2>
+                                                </div>
+                                                <div className='division'>
+                                                    <div className='community'>
+                                                        <img src={prescription} className="prescription" alt="prescription" />
+                                                        <h2>Your community is % infected</h2>
+                                                        <h4>Some more data</h4>
+                                                    </div>
+                                                </div>
+                                                <div className='division infected'>
+                                                  <PieChart width={600} height={300}>
+                                                      <Pie
+                                                          data={donut_data}
+                                                          cx={220}
+                                                          cy={200}
+                                                          startAngle={180}
+                                                          endAngle={0}
+                                                          innerRadius={60}
+                                                          outerRadius={80}
+                                                          fill="#3abdcf"
+                                                          paddingAngle={5}
+                                                          >
+                                                      </Pie>
+                                                  </PieChart>
+                                                  <h2>{this.state.cdc.statename} has a {this.state.cdc.activity_level_label} level of infection</h2>
+                                                    </div>
+                                                    <div className='tweets'>
+                                                        <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
+                                                        {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
+                                                    </div>
+                                                    <div className='division'>
+                                                        <div className='footer'>
+                                                            <h4>Made with <img src={like} className="like" alt="like" /></h4>
+                                                        </div>
+                                                    </div>
+                                              </div>}
+
+                </MuiThemeProvider>
+            </div>
+        );
+    }
+}
 
             export default App;
