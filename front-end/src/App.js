@@ -184,7 +184,7 @@ class App extends Component {
                                         <h3>Keeping the flu away from our communities.</h3>
                                         <TextField
                                             className="zipcode"
-                                            hintText="Try another zip code"
+                                            hintText={this.state.cdc.postal}
                                             hintStyle={{ width: '100%', textAlign: 'center' }}
                                             inputStyle={{ width: '100%', textAlign: 'center' }}
                                         />
