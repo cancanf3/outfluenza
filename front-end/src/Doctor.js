@@ -22,7 +22,7 @@ class Doctor extends Component {
         console.log(this.props.doctors);
         return(
             <div className='doctor' onClick={this.toggleInfo}>
-                <h3><strong>{this.props.name}</strong> - {this.props.distance.toFixed(1)} miles day</h3>
+                <h3><strong>{this.props.name}</strong> - {this.props.distance.toFixed(1)} miles away</h3>
                 <p>
                     <img className="pin" src={pin}/>
                     {this.state.show_info ? this.props.location: null}

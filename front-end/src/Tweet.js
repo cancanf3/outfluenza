@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Tweet.css';
+import bird from './aux/twitter.svg';
+
 
 class Tweet extends Component {
 
@@ -7,7 +9,7 @@ class Tweet extends Component {
         return(
             <blockquote className="twitter-tweet">
                 <p>{this.props.text}</p>
-                <a><strong> - {this.props.user}</strong> - {this.props.distance.toFixed(1)} miles away</a>
+                <a><img className="bird" src={bird}/><strong> {this.props.user}</strong> - {this.props.distance.toFixed(1)} miles away</a>
             </blockquote>
         );
     }

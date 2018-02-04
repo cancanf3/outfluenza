@@ -9,6 +9,8 @@ blockquote.twitter-tweet {
   border-style: solid;
   border-width: 0.5px;
   padding: 0 16px 16px 16px;
+  text-align: left;
+  width: 90%;
 }
 
 blockquote.twitter-tweet p {
@@ -29,4 +31,8 @@ blockquote.twitter-tweet a {
 blockquote.twitter-tweet a:hover,
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
+}
+
+.bird {
+    height: 20px;
 }
