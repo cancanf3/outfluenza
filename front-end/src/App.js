@@ -13,6 +13,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { PieChart, Pie, Sector } from 'recharts';
+import {Doughnut} from 'react-chartjs-2';
 
 WebFont.load({
     google: {
@@ -28,8 +29,8 @@ class App extends Component {
             tweets: 'loading',
             showTweets: false,
             coordinates: {
-              "latitude": 0,
-              "longitude": 0
+                "latitude": 0,
+                "longitude": 0
             },
             toggleLoad:false,
         };
@@ -55,50 +56,50 @@ class App extends Component {
     }
 
     getGeoLoc() {
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition( (position) => {
-            let json = {
-              "latitude": position.coords.latitude,
-              "longitude": position.coords.longitude
-            };
-            this.setState({coordinates:json})
-            this.getTweets();
-            this.getDoctors();
-        });
-      }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition( (position) => {
+                let json = {
+                    "latitude": position.coords.latitude,
+                    "longitude": position.coords.longitude
+                };
+                this.setState({coordinates:json})
+                this.getTweets();
+                this.getDoctors();
+            });
+        }
     }
 
     getTweets() {
-      fetch('https://86c8f266.ngrok.io/rest/mangohacks/tweets/', {
-        method: 'POST',
-        body: JSON.stringify(this.state.coordinates),
-        headers: {'Content-Type': 'application/json'}
-      }).then( data => {
-        return data.json();
-      }).then(data => {
-          this.setState({tweets:data});
-      });
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/tweets/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
+        }).then( data => {
+            return data.json();
+        }).then(data => {
+            this.setState({tweets:data});
+        });
 
     }
 
 
     getDoctors() {
-      console.log(this.state.coordinates);
-      console.log(this.state.flag);
-      fetch('https://86c8f266.ngrok.io/rest/mangohacks/doctors/', {
-        method: 'POST',
-        body: JSON.stringify(this.state.coordinates),
-        headers: {'Content-Type': 'application/json'}
+        console.log(this.state.coordinates);
+        console.log(this.state.flag);
+        fetch('https://86c8f266.ngrok.io/rest/mangohacks/doctors/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.coordinates),
+            headers: {'Content-Type': 'application/json'}
 
-      }).then( data => { return data.json(); }).then(data => {
-          console.log(data);
-          this.setState({toggleLoad:false});
-      });
+        }).then( data => { return data.json(); }).then(data => {
+            console.log(data);
+            this.setState({toggleLoad:false});
+        });
 
     }
 
     componentWillMount() {
-      this.setState({toggleLoad:true});
+        this.setState({toggleLoad:true});
     }
 
     componentDidMount() {
@@ -119,6 +120,26 @@ class App extends Component {
     }
 
     render() {
+
+        var donut_data = {
+            datasets: [{
+                data: [80, 20],
+                backgroundColor: [
+                    '#0d171b',
+                    '#3abdcf'
+                ]
+            }],
+            labels: [
+                'Not Infected',
+                'Infected'
+            ]
+        };
+
+        var donut_options = {
+            circumference: Math.PI,
+            rotation: Math.PI,
+        }
+
         return (
             <div className="App">
                 <MuiThemeProvider>
@@ -148,6 +169,7 @@ class App extends Component {
                                 <h4>Some more data</h4>
                             </div>
                         </div>
+                        <Doughnut data={donut_data} options={donut_options}/>
                         <div className='tweets'>
                             <RaisedButton className="button" label="Tweets" primary={true} onClick={this.toggleTweet.bind(this)} />
                             {this.state.showTweets ? <Tweets tweets={this.state.tweets}/> : null}
