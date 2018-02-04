@@ -20,10 +20,10 @@ class Doctor extends Component {
     render() {
         console.log(this.props.doctors);
         return(
-            <div className='doctor'>
+            <div className='doctor' onClick={this.toggleAddress}>
                 <h3>{this.props.name}</h3>
                 <p>
-                    <img className="pin" onClick={this.toggleAddress} src={pin}/>
+                    <img className="pin" src={pin}/>
                     {this.state.show_address ? this.props.location : null}
                 </p>
             </div>
