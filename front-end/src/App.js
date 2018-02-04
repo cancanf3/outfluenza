@@ -66,7 +66,7 @@ class App extends Component {
         }
     }
 
-    getGeoFromZip() {
+    getGeoFromZip(zipcode) {
       fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
           method: 'POST',
           body: JSON.stringify({"zipcode":zipcode}),
@@ -201,7 +201,7 @@ class App extends Component {
         }
 
         const RADIAN = Math.PI / 180;
-        const COLORS = ['#0088FE', '#00C49F'];
+        const COLORS = ['#D75A4A', '#FFF'];
 
         return (
             <div className="App">
@@ -222,25 +222,6 @@ class App extends Component {
                                         <img src={logo} className="App-logo" alt="logo" />
                                         <h1>Outfluenza.</h1>
                                         <h3>Keeping the flu away from our communities.</h3>
-                                        <TextField
-                                            hintText={this.state.cdc.postal}
-                                            onChange={ this.handleChange }
-                                            className="zipcode"
-                                            id='zipcode'
-                                            hintStyle={{ width: '100%', textAlign: 'center' }}
-                                            inputStyle={{ width: '100%', textAlign: 'center' }}
-                                            onChange={this.enableButton}
-                                        />
-                                        <FlatButton
-                                            label="Change"
-                                            style={{width:'4%', marginLeft:'1%'}}
-<<<<<<< HEAD
-                                            onClick={this.getGeoFromZip}/>
-=======
-                                            onClick={this.submitZip}
-                                            disabled={!this.state.enableButton}
-                                        />
->>>>>>> 00463c31ee76c4e94d6665e39bf398253e1c853a
                                     </div>
                                 </div>
                                 <div className='division'>
@@ -268,6 +249,9 @@ class App extends Component {
                                                 fill="#D75A4A"
                                                 paddingAngle={0}
                                                 >
+                                                {
+                                                	dunut_data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+                                                }
                                                 </Pie>
                                             </PieChart>
                                         </div>
