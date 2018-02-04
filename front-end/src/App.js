@@ -9,6 +9,7 @@ import Notification from './notification.js';
 import Tweets from './Tweets.js';
 import WebFont from 'webfontloader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { PieChart, Pie, Sector } from 'recharts';
@@ -30,7 +31,7 @@ class App extends Component {
               "latitude": 0,
               "longitude": 0
             },
-            flag:0,
+            toggleLoad:false,
         };
     }
 
@@ -53,6 +54,19 @@ class App extends Component {
         });
     }
 
+    getGeoLoc() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition( (position) => {
+            let json = {
+              "latitude": position.coords.latitude,
+              "longitude": position.coords.longitude
+            };
+            this.setState({coordinates:json})
+            this.getTweets();
+            this.getDoctors();
+        });
+      }
+    }
 
     getTweets() {
       fetch('https://86c8f266.ngrok.io/rest/mangohacks/tweets/', {
@@ -78,21 +92,23 @@ class App extends Component {
 
       }).then( data => { return data.json(); }).then(data => {
           console.log(data);
+          this.setState({toggleLoad:false});
       });
 
     }
 
-    componentDidMount() {
-        this.getGeoLoc();
+    componentWillMount() {
+      this.setState({toggleLoad:true});
+    }
 
-        // this.callAPI();
+    componentDidMount() {
+        this.getGeoLoc()
     }
 
     toggleTweet() {
         var state = this.state.showTweets;
         this.setState({showTweets:!state});
-        this.getTweets();
-        this.getDoctors();
+
     }
 
     callFluLocation = (e) => {
@@ -102,28 +118,12 @@ class App extends Component {
         }
     }
 
-    getGeoLoc() {
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition( (position) => {
-            var json = {
-              "latitude": position.coords.latitude,
-              "longitude": position.coords.longitude,
-            };
-            this.setState({coordinates:json})
-
-        });
-      }
-    }
-
-
-
-
-
     render() {
         return (
             <div>
                 <MuiThemeProvider>
-                    <div className="App">
+                    {this.state.toggleLoad ? <CircularProgress mode="indeterminate"/> :
+                      <div className="App">
                         <div>
                             <img src={logo} className="App-logo" alt="logo" />
                             <h2>Outfluenza</h2>
@@ -153,7 +153,7 @@ class App extends Component {
                                 <h4>Made with <img src={like} className="like" alt="like" /></h4>
                             </div>
                         </div>
-                    </div>
+                    </div>}
                 </MuiThemeProvider>
             </div>
         );

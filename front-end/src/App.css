@@ -74,6 +74,10 @@ body {
     background-size: cover;
 }
 
+.CircularProgress {
+  
+}
+
 .footer {
     background: -webkit-linear-gradient(233deg, #4DD0E1, #00695C); color: rgb(255, 255, 255);
     padding: 2% 0 0 0;
