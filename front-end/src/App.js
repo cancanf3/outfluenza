@@ -45,7 +45,9 @@ class App extends Component {
             zip:'zipcode',
             text: 'zipcode',
             trends: [],
+            nocoords: false,
         };
+
     }
 
     handleChange = ( e ) => {
@@ -121,8 +123,16 @@ class App extends Component {
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
 
-        }).then( data => { return data.json(); }).then(data => {
+        }).then( data => {
+            if (!data.ok) {
+                throw Error(data.statusText);
+            }
+            return data.json();
+          }).then(data => {
             this.setState({cdc:data});
+            this.setState({toggleLoad:false});
+            this.setState({nocoords:true});
+        }).catch( () => {
             this.setState({toggleLoad:false});
         });
 
@@ -134,12 +144,19 @@ class App extends Component {
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
 
-        }).then( data => { return data.json(); }).then(data => {
+        }).then( data => {
+          if (!data.ok) {
+              throw Error(data.statusText);
+          }
+          return data.json();
+        }).then(data => {
             var arr = [];
             for(var key in data.flu) {
               arr.push({"name":key, "rating":data.flu[key]});
             }
             this.setState({trends:arr});
+        }).catch( () => {
+            this.setState({toggleLoad:false});
         });
 
     }
@@ -259,10 +276,12 @@ class App extends Component {
                                         />
                                     </div>
                                 </div>
+                                { this.state.nocoords ?
+                                <div>
                                 <div className='division'>
                                     <div className='personal'>
                                       <h2 className="chart">Region based flu search trends</h2>
-                                          <LineChart width={750} height={350} data={this.state.trends}
+                                          <LineChart width={350} height={350} data={this.state.trends}
                                             margin={{top: 0, right: 30, left: 5, bottom: 5}}>
                                             <XAxis stroke="white"/>
                                             <CartesianGrid strokeDasharray="3 3"/>
@@ -313,7 +332,7 @@ class App extends Component {
                                         <div className='tweets'>
                                             <Tweets stage={this.state.tweets} tweets={this.state.tweets.nearbyTweets}/>
                                         </div>
-                                        <Footer like={like}/>
+                                        <Footer like={like}/> </div>: null}
                                     </div>}
                                 </MuiThemeProvider>
                             </div>
