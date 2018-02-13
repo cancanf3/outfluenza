@@ -10,6 +10,7 @@
     "react-browser-notifications": "^1.0.14",
     "react-chartjs-2": "^2.7.0",
     "react-dom": "^16.2.0",
+    "react-responsive-container": "0.0.0",
     "react-router": "^3.0.5",
     "react-scripts": "1.1.0",
     "react-snowstorm": "0.0.2",
