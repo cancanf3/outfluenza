@@ -15,10 +15,9 @@ import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { PieChart, Pie, RadialBarChart, RadialBar, Sector, Legend, Cell, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
-import {Doughnut} from 'react-chartjs-2';
+import { PieChart, Pie, RadialBarChart, ResponsiveContainer, RadialBar, Sector, Legend, Cell, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
+import { Doughnut } from 'react-chartjs-2';
 import SnowStorm from 'react-snowstorm';
-
 
 
 WebFont.load({
@@ -155,7 +154,6 @@ class App extends Component {
     toggleTweet() {
         var state = this.state.showTweets;
         this.setState({showTweets:!state});
-
     }
 
     callFluLocation = (e) => {
@@ -195,16 +193,6 @@ class App extends Component {
                 'Not Infected'
             ]
         };
-
-        var cool_data = [
-            {name: '18-24', uv: 31.47, pv: 2400, fill: '#8884d8'},
-            {name: '25-29', uv: 26.69, pv: 4567, fill: '#83a6ed'},
-            {name: '30-34', uv: 15.69, pv: 1398, fill: '#8dd1e1'},
-            {name: '35-39', uv: 8.22, pv: 9800, fill: '#82ca9d'},
-            {name: '40-49', uv: 8.63, pv: 3908, fill: '#a4de6c'},
-            {name: '50+', uv: 2.63, pv: 4800, fill: '#d0ed57'},
-            {name: 'unknow', uv: 6.67, pv: 4800, fill: '#ffc658'}
-        ];
 
         const style = {
             top: 0,
@@ -260,20 +248,23 @@ class App extends Component {
                                     </div>
                                 </div>
                                 <div className='division'>
-                                    <div className='personal'>
-                                      <h2 className="chart">Region based flu search trends</h2>
-                                          <LineChart width={750} height={350} data={this.state.trends}
-                                            margin={{top: 0, right: 30, left: 5, bottom: 5}}>
-                                            <XAxis stroke="white"/>
-                                            <CartesianGrid strokeDasharray="3 3"/>
-                                           <YAxis stroke="white"/>
-                                           <Tooltip name="name"/>
-                                           <Line type="monotone" dataKey="rating" stroke="black" activeDot={{r: 8}}/>
-                                           <Line type="monotone" dataKey="name" stroke="black" />
-                                            <Line stroke="white" />
-                                        </LineChart>
-                                        <h4 className="disclaimer">sourced from google trends</h4>
-                                    </div>
+                                  <div className='personal'>
+                                    <h2 className="chart">Region based flu search trends</h2>
+                                    <ResponsiveContainer className="ct" width='100%' aspect={4.0/1.0}>
+
+                                    <LineChart width={750} height={350} data={this.state.trends}
+                                          margin={{top: 0, right: 30, left: 5, bottom: 5}}>
+                                          <XAxis stroke="white"/>
+                                          <CartesianGrid strokeDasharray="3 3"/>
+                                         <YAxis stroke="white"/>
+                                         <Tooltip name="name"/>
+                                         <Line type="monotone" dataKey="rating" stroke="black" activeDot={{r: 8}}/>
+                                         <Line type="monotone" dataKey="name" stroke="black" />
+                                          <Line stroke="white" />
+                                      </LineChart>
+                                    </ResponsiveContainer>
+                                      <h4 className="disclaimer">sourced from google trends</h4>
+                                  </div>
                                 </div>
                                 <div className='division'>
                                     <h1>Treat the flu: Doctors close to you</h1>
