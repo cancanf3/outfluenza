@@ -245,7 +245,7 @@ class App extends Component {
                                 <div className='main'>
                                     <div className='logo'>
                                         <img src={logo} className="App-logo" alt="logo" />
-                                        <h1>`Outfluenza.`</h1>
+                                        <h1>Outfluenza.</h1>
                                         <h3>Keeping the flu away from our communities.</h3>
                                         <TextField
                                             hintText={this.state.cdc.postal}
