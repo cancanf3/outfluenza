@@ -12,7 +12,8 @@ from pytrends.request import TrendReq
 
 def getMostRecentCdcData(state):
     try:
-        with open('/home/student/DataLions/Server/DataLionsAPI/rest/classes/storedData/lastUpdate.txt', 'r') as f:
+        with open(os.path.join(os.path.dirname(__file__), './storedData/lastUpdate.txt'), "r") as f:
+        # with open('/home/student/DataLions/Server/DataLionsAPI/rest/classes/storedData/lastUpdate.txt', 'r') as f:
             lastUpdateCdc= f.readline()
             print(lastUpdateCdc)
             lastUpdateDate = f.readline()
@@ -27,12 +28,12 @@ def getMostRecentCdcData(state):
         writeRecentCdcData()
 
     latestFile = '1988-89.txt'
-    for f in os.listdir('/home/student/DataLions/Server/DataLionsAPI/rest/classes/storedData/i/'):
+    for f in os.listdir(os.path.join(os.path.dirname(__file__), './storedData/i/')):
         if f > latestFile:
             latestFile = f
 
     fileContents = ''
-    with open('/home/student/DataLions/Server/DataLionsAPI/rest/classes/storedData/i/'+latestFile, 'r') as f:
+    with open(os.path.join(os.path.dirname(__file__), './storedData/i/')+latestFile, 'r') as f:
         fileContents = f.read()
         f.close()
 
@@ -80,7 +81,7 @@ def writeRecentCdcData():
         season.encode('ascii','ignore')
         if season > maxSeason:
             maxSeason = season
-        with open('/home/student/DataLions/Server/DataLionsAPI/rest/classes/storedData/i/' + season +'.txt', 'w') as f:
+        with open(os.path.join(os.path.dirname(__file__), './storedData/i/') + season +'.txt', 'w') as f:
             f.write(json.dumps(dataset[season]))
             f.close()
 
@@ -95,14 +96,14 @@ def writeRecentCdcData():
     if maxWeek<0:
         maxWeek+=52
 
-    with open('/home/student/DataLions/Server/DataLionsAPI/rest/classes/storedData/lastUpdate.txt', 'w') as f:
+    with open(os.path.join(os.path.dirname(__file__), './storedData/lastUpdate.txt'), 'w') as f:
         f.write(dataset[maxSeason][str(maxWeek)]["Florida"]['weekend']+"\n")
         f.write(datetime.datetime.today().strftime('%b-%d-%Y'))
         f.close()
 
     return
 
-def getGoogleTrendData(geoCode):
+def getGoogleTrendData2(geoCode):
     pytrend = TrendReq(hl='en-US', tz=360)
     kw_list=['flu']
 

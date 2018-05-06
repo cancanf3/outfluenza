@@ -71,7 +71,7 @@ class App extends Component {
 
     getGeoFromZip(zipcode) {
         this.setState({toggleLoad : true});
-        fetch('https://86c8f266.ngrok.io/rest/mangohacks/zipcode/', {
+        fetch('https://924bf2d9.ngrok.io/zipcode/', {
             method: 'POST',
             body: JSON.stringify({"zipcode":zipcode}),
             headers: {'Content-Type': 'application/json'}
@@ -91,7 +91,7 @@ class App extends Component {
     }
 
     getTweets() {
-        fetch('https://86c8f266.ngrok.io/rest/mangohacks/tweets/', {
+        fetch('https://924bf2d9.ngrok.io/tweets/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
@@ -105,7 +105,7 @@ class App extends Component {
 
 
     getDoctors() {
-        fetch('https://86c8f266.ngrok.io/rest/mangohacks/doctors/', {
+        fetch('https://924bf2d9.ngrok.io/doctors/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
@@ -117,7 +117,7 @@ class App extends Component {
     }
 
     getCDC() {
-        fetch('https://86c8f266.ngrok.io/rest/mangohacks/cdc/', {
+        fetch('https://924bf2d9.ngrok.io/cdc/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
@@ -138,7 +138,7 @@ class App extends Component {
     }
 
     getTrends() {
-        fetch('https://86c8f266.ngrok.io/rest/mangohacks/googletrends/', {
+        fetch('https://924bf2d9.ngrok.io/googletrends/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}

@@ -19,12 +19,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from outfluenza import MangoHacksView
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^tweets/$', MangoHacksView.MangoHacksView.as_view()),
-    url(r'^doctors/$', MangoHacksView.MangoHacksView.getDoctors),
-    url(r'^cdc/$', MangoHacksView.MangoHacksView.getMostRecentCDC),
-    url(r'^googletrends/$', MangoHacksView.MangoHacksView.getGoogleTrendData),
-    url(r'^zipcode/$', MangoHacksView.MangoHacksView.getGeoLocation),
+	url(r'^admin/', admin.site.urls),
+	url(r'^tweets/$', MangoHacksView.MangoHacksView.as_view()),
+	url(r'^doctors/$', MangoHacksView.getDoctors),
+	url(r'^cdc/$', MangoHacksView.getMostRecentCDC),
+	url(r'^googletrends/$', MangoHacksView.getGoogleTrendData),
+	url(r'^zipcode/$', MangoHacksView.getGeoLocation),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
