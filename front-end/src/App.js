@@ -71,7 +71,7 @@ class App extends Component {
 
     getGeoFromZip(zipcode) {
         this.setState({toggleLoad : true});
-        fetch('https://924bf2d9.ngrok.io/zipcode/', {
+        fetch('https://outfluenza-api.herokuapp.com/zipcode/', {
             method: 'POST',
             body: JSON.stringify({"zipcode":zipcode}),
             headers: {'Content-Type': 'application/json'}
@@ -91,7 +91,7 @@ class App extends Component {
     }
 
     getTweets() {
-        fetch('https://924bf2d9.ngrok.io/tweets/', {
+        fetch('https://outfluenza-api.herokuapp.com/tweets/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
@@ -105,7 +105,7 @@ class App extends Component {
 
 
     getDoctors() {
-        fetch('https://924bf2d9.ngrok.io/doctors/', {
+        fetch('https://outfluenza-api.herokuapp.com/doctors/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
@@ -117,7 +117,7 @@ class App extends Component {
     }
 
     getCDC() {
-        fetch('https://924bf2d9.ngrok.io/cdc/', {
+        fetch('https://outfluenza-api.herokuapp.com/cdc/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
@@ -138,7 +138,7 @@ class App extends Component {
     }
 
     getTrends() {
-        fetch('https://924bf2d9.ngrok.io/googletrends/', {
+        fetch('https://outfluenza-api.herokuapp.com/googletrends/', {
             method: 'POST',
             body: JSON.stringify(this.state.coordinates),
             headers: {'Content-Type': 'application/json'}
